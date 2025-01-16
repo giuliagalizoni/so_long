@@ -8,13 +8,9 @@
 #include <fcntl.h>
 
 #define TILE_SIZE 48
-
 #define WALL "assets/Tree.xpm"
 #define GROUND "assets/Ground.xpm"
 #define FARMER "assets/Player_front.xpm"
-
-#define WIDTH 720
-#define HEIGHT 480
 
 typedef struct	s_img {
 	void	*img;
@@ -25,17 +21,21 @@ typedef struct	s_img {
 }				t_img;
 
 typedef struct s_map {
-	char *arr[9];
+	char **arr;
 } t_map;
 
 
 typedef struct	s_vars {
 	void	*mlx;
 	void	*win;
+	int		width;
+	int		height;
 	t_img	ground;
 	t_img	wall;
 	t_img	farmer;
 	t_map	map;
 }				t_vars;
+
+char	**make_map_arr(char *map_path);
 
 #endif
