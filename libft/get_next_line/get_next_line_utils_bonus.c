@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 15:03:20 by ggalizon          #+#    #+#             */
-/*   Updated: 2024/12/20 14:20:52 by ggalizon         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:01:27 by ggalizon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -77,7 +77,7 @@ char	*ft_strdup(char *src)
 
 	if (!src)
 		return (NULL);
-	dup = malloc((ft_strlen(src) + 1) * sizeof(char));
+	dup = malloc(ft_strlen(src) + 1 * sizeof(char));
 	if (!dup)
 		return (NULL);
 	i = 0;
