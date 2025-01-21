@@ -1,6 +1,6 @@
 # for mac
 test:
-	cc -Wall -Wextra -Werror *.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c -Llibft -lft -Ilibft ./mlx/libmlx.a -framework OpenGL -framework AppKit -o so_long
+	cc -Wall -Wextra -Werror src/*.c -Llibft -lft -Ilibft ./mlx/libmlx.a -framework OpenGL -framework AppKit -o so_long
 
 # for Linux
 # test:
