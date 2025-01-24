@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
+/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:44:27 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/20 17:15:24 by giuliagaliz      ###   ########.fr       */
+/*   Updated: 2025/01/24 17:31:10 by ggalizon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "get_next_line/get_next_line.h"
 # include <stdlib.h>
 # include <fcntl.h>
+# include <stdio.h>
 
 # define WALL "assets/Tree.xpm"
 # define GROUND "assets/Ground.xpm"
@@ -104,5 +105,9 @@ void	init_map(t_vars *vars, char *map_path);
 void	redraw_window(t_vars *vars);
 void	init_img(t_vars *vars);
 void	move_farmer(t_vars *vars, int key);
+int		error_message(char *message);
+int		check_map(t_vars *vars);
+void	free_map(char **arr);
+void	cleanup(t_vars *vars);
 
 #endif

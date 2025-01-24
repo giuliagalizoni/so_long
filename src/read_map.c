@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
+/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:44:45 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/20 14:15:12 by giuliagaliz      ###   ########.fr       */
+/*   Updated: 2025/01/24 18:27:44 by ggalizon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ static int	read_map(char *map_path)
 		return (-1);
 	map_line = get_next_line(map_fd);
 	count = 0;
-	while (map_line)
+	while (map_line != NULL)
 	{
+		free(map_line);
 		map_line = get_next_line(map_fd);
 		count++;
 	}
 	free(map_line);
+	map_line = NULL;
 	close(map_fd);
 	return (count);
 }
@@ -43,8 +45,10 @@ static char	**make_map_arr(char *map_path)
 	size = read_map(map_path);
 	map_fd = open(map_path, O_RDONLY);
 	if (map_fd == -1)
-		return (NULL);
-	map_arr = malloc(size * sizeof(char *) + 1);
+		return (error_message("Error reading map file"), NULL);
+	map_arr = malloc((size + 1) * sizeof(char *));
+	if (!map_arr)
+		return (error_message("Error processing map. Please try again"), NULL);
 	i = 0;
 	while (i < size)
 	{
@@ -52,6 +56,7 @@ static char	**make_map_arr(char *map_path)
 		i++;
 	}
 	map_arr[i] = NULL;
+	close(map_fd);
 	return (map_arr);
 }
 
@@ -63,6 +68,8 @@ static void	scan_map(t_vars *vars, int *y, int *x)
 		*x = 0;
 		while (vars->map.arr[*y][*x])
 		{
+			if (vars->map.arr[*y][*x] == '\n')
+				vars->map.arr[*y][*x] = '\0';
 			if (vars->map.arr[*y][*x] == 'P')
 			{
 				vars->farmer.x = *x * TILE_SIZE;
@@ -88,4 +95,20 @@ void	init_map(t_vars *vars, char *map_path)
 	vars->map.width = (x - 1) * TILE_SIZE;
 	vars->map.height = y * TILE_SIZE;
 	vars->farmer.mov_count = 0;
+	check_map(vars);
+}
+
+void	free_map(char **arr)
+{
+	int	y;
+
+	if (!arr)
+		return ;
+	y = 0;
+	while (arr[y])
+	{
+		free(arr[y]);
+		y++;
+	}
+	free(arr);
 }

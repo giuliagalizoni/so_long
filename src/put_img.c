@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_img.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
+/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:59:44 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/20 13:51:27 by giuliagaliz      ###   ########.fr       */
+/*   Updated: 2025/01/24 17:03:46 by ggalizon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,34 @@ void	init_img(t_vars *vars)
 	int	tile_width;
 	int	tile_height;
 
-	// if not return
 	vars->ground.img = mlx_xpm_file_to_image(vars->mlx, GROUND,
 			&img_width, &img_height);
+	if (!vars->ground.img)
+		cleanup(vars);
 	vars->wall.img = mlx_xpm_file_to_image(vars->mlx, WALL,
 			&tile_width, &tile_height);
+	if (!vars->wall.img)
+		cleanup(vars);
 	vars->farmer.front = mlx_xpm_file_to_image(vars->mlx, FARMER,
 			&img_width, &img_height);
+	if (!vars->farmer.front)
+		cleanup(vars);
 	vars->carrot.img = mlx_xpm_file_to_image(vars->mlx, CARROT,
 			&img_width, &img_height);
+	if (!vars->carrot.img)
+		cleanup(vars);
 	vars->house.img = mlx_xpm_file_to_image(vars->mlx, HOUSE,
 			&img_width, &img_height);
+	if (!vars->house.img)
+		cleanup(vars);
 	vars->farmer.start = mlx_xpm_file_to_image(vars->mlx, FARMER_START,
 			&img_width, &img_height);
+	if (!vars->farmer.start)
+		cleanup(vars);
 	vars->pig.img = mlx_xpm_file_to_image(vars->mlx, PIG,
 			&img_width, &img_height);
+	if (!vars->pig.img)
+		cleanup(vars);
 }
 
 // void	tile_window(t_vars *vars)
