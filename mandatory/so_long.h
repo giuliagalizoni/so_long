@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:44:27 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/24 17:31:10 by ggalizon         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:14:05 by giuliagaliz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "mlx/mlx.h"
-# include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
+# include "../mlx/mlx.h"
+# include "../libft/libft.h"
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -46,20 +45,6 @@
 #  error "Unsupported operating system"
 # endif
 
-// linux
-// # define UP 65362
-// # define DOWN 65364
-// # define RIGHT 65363
-// # define LEFT 65361
-// # define ESC 65307
-
-// macOS
-// # define UP 126
-// # define DOWN 125
-// # define RIGHT 124
-// # define LEFT 123
-// # define ESC 53
-
 typedef struct s_img
 {
 	void	*img;
@@ -75,7 +60,11 @@ typedef struct s_map
 	int		width;
 	int		height;
 	int		c;
+	int		p;
+	int		e;
+	int		c_reach;
 	int		end;
+	int		invalid;
 }	t_map;
 
 typedef struct s_player
@@ -101,7 +90,6 @@ typedef struct s_vars
 }	t_vars;
 
 void	init_map(t_vars *vars, char *map_path);
-// void	tile_window(t_vars *vars);
 void	redraw_window(t_vars *vars);
 void	init_img(t_vars *vars);
 void	move_farmer(t_vars *vars, int key);
@@ -109,5 +97,7 @@ int		error_message(char *message);
 int		check_map(t_vars *vars);
 void	free_map(char **arr);
 void	cleanup(t_vars *vars);
+int		exit_sucess(t_vars *vars);
+int		validate_map(t_vars *vars);
 
 #endif

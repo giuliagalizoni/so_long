@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:44:45 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/24 18:27:44 by ggalizon         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:46:55 by giuliagaliz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	read_map(char *map_path)
 	return (count);
 }
 
-static char	**make_map_arr(char *map_path)
+char	**make_map_arr(char *map_path)
 {
 	char	**map_arr;
 	int		map_fd;
@@ -70,13 +70,19 @@ static void	scan_map(t_vars *vars, int *y, int *x)
 		{
 			if (vars->map.arr[*y][*x] == '\n')
 				vars->map.arr[*y][*x] = '\0';
-			if (vars->map.arr[*y][*x] == 'P')
+			else if (vars->map.arr[*y][*x] == 'P')
 			{
+				vars->map.p++;
 				vars->farmer.x = *x * TILE_SIZE;
 				vars->farmer.y = *y * TILE_SIZE;
 			}
-			if (vars->map.arr[*y][*x] == 'C')
+			else if (vars->map.arr[*y][*x] == 'C')
 				vars->map.c++;
+			else if (vars->map.arr[*y][*x] == 'E')
+				vars->map.e++;
+			else if (vars->map.arr[*y][*x] != '0'
+				&& vars->map.arr[*y][*x] != '1')
+				vars->map.invalid = 1;
 			(*x)++;
 		}
 		(*y)++;
@@ -90,25 +96,15 @@ void	init_map(t_vars *vars, char *map_path)
 
 	vars->map.arr = make_map_arr(map_path);
 	vars->map.c = 0;
+	vars->map.e = 0;
+	vars->map.p = 0;
 	vars->map.end = 0;
+	vars->map.invalid = 0;
 	scan_map(vars, &y, &x);
 	vars->map.width = (x - 1) * TILE_SIZE;
 	vars->map.height = y * TILE_SIZE;
 	vars->farmer.mov_count = 0;
 	check_map(vars);
-}
-
-void	free_map(char **arr)
-{
-	int	y;
-
-	if (!arr)
-		return ;
-	y = 0;
-	while (arr[y])
-	{
-		free(arr[y]);
-		y++;
-	}
-	free(arr);
+	if (!validate_map(vars))
+		cleanup(vars);
 }

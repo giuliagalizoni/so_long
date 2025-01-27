@@ -3,70 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   put_img.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:59:44 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/24 17:03:46 by ggalizon         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:56:11 by giuliagaliz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-void	init_img(t_vars *vars)
-{
-	int	img_width;
-	int	img_height;
-	int	tile_width;
-	int	tile_height;
-
-	vars->ground.img = mlx_xpm_file_to_image(vars->mlx, GROUND,
-			&img_width, &img_height);
-	if (!vars->ground.img)
-		cleanup(vars);
-	vars->wall.img = mlx_xpm_file_to_image(vars->mlx, WALL,
-			&tile_width, &tile_height);
-	if (!vars->wall.img)
-		cleanup(vars);
-	vars->farmer.front = mlx_xpm_file_to_image(vars->mlx, FARMER,
-			&img_width, &img_height);
-	if (!vars->farmer.front)
-		cleanup(vars);
-	vars->carrot.img = mlx_xpm_file_to_image(vars->mlx, CARROT,
-			&img_width, &img_height);
-	if (!vars->carrot.img)
-		cleanup(vars);
-	vars->house.img = mlx_xpm_file_to_image(vars->mlx, HOUSE,
-			&img_width, &img_height);
-	if (!vars->house.img)
-		cleanup(vars);
-	vars->farmer.start = mlx_xpm_file_to_image(vars->mlx, FARMER_START,
-			&img_width, &img_height);
-	if (!vars->farmer.start)
-		cleanup(vars);
-	vars->pig.img = mlx_xpm_file_to_image(vars->mlx, PIG,
-			&img_width, &img_height);
-	if (!vars->pig.img)
-		cleanup(vars);
-}
-
-// void	tile_window(t_vars *vars)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	y = 0;
-// 	while (y < vars->map.height)
-// 	{
-// 		x = 0;
-// 		while (x < vars->map.width)
-// 		{
-// 			mlx_put_image_to_window(vars->mlx, vars->win,
-// 				vars->ground.img, x, y);
-// 			x += TILE_SIZE;
-// 		}
-// 		y += TILE_SIZE;
-// 	}
-// }
 
 void	check_tile(t_vars *vars, int row, int col)
 {
@@ -129,7 +73,6 @@ void	end_game(t_vars *vars)
 	int	center_x;
 	int	center_y;
 
-	// tile_window(vars);
 	center_x = vars->map.width / 2;
 	center_y = vars->map.height / 2;
 	mlx_string_put(vars->mlx, vars->win, center_x - 50, center_y - 10,
@@ -147,13 +90,14 @@ void	redraw_window(t_vars *vars)
 	y = vars->farmer.y / TILE_SIZE;
 	x = vars->farmer.x / TILE_SIZE;
 	mlx_clear_window(vars->mlx, vars->win);
-	// tile_window(vars);
 	draw_layer(vars);
 	put_credits(vars);
 	if (vars->map.arr[y][x] == 'P')
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->farmer.start, vars->farmer.x, vars->farmer.y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->farmer.start,
+			vars->farmer.x, vars->farmer.y);
 	else
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->farmer.front, vars->farmer.x, vars->farmer.y);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->farmer.front,
+			vars->farmer.x, vars->farmer.y);
 	if (vars->map.arr[y][x] == 'C')
 	{
 		vars->map.arr[y][x] = '0';
