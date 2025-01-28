@@ -32,8 +32,14 @@ SRCS = \
 
 BONUS_SRCS = \
     $(BONUS_DIR)$(SRC_DIR)so_long_bonus.c \
-    $(BONUS_DIR)$(SRC_DIR)bonus_check_map.c \
-    $(BONUS_DIR)$(SRC_DIR)bonus_check_path.c
+    $(BONUS_DIR)$(SRC_DIR)check_map_bonus.c \
+    $(BONUS_DIR)$(SRC_DIR)check_path_bonus.c \
+    $(BONUS_DIR)$(SRC_DIR)clean_and_exit_bonus.c \
+    $(BONUS_DIR)$(SRC_DIR)init_images_bonus.c \
+    $(BONUS_DIR)$(SRC_DIR)movements_bonus.c \
+    $(BONUS_DIR)$(SRC_DIR)put_img_bonus.c \
+    $(BONUS_DIR)$(SRC_DIR)read_map_bonus.c \
+	$(BONUS_DIR)$(SRC_DIR)features_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
