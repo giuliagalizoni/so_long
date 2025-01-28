@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
+/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:44:10 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/27 15:29:47 by giuliagaliz      ###   ########.fr       */
+/*   Updated: 2025/01/28 12:07:58 by ggalizon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(int ac, char **av)
 	if (!vars.mlx)
 		return (1);
 	init_img(&vars);
+	vars.win = NULL;
 	init_map(&vars, av[1]);
 	vars.win = mlx_new_window(vars.mlx, vars.map.width,
 			vars.map.height, "So_long");

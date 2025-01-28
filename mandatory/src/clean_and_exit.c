@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clean_and_exit.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 11:22:46 by ggalizon          #+#    #+#             */
+/*   Updated: 2025/01/28 14:47:10 by ggalizon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 int	exit_sucess(t_vars *vars)
@@ -27,6 +39,7 @@ void	free_map(char **arr)
 		i++;
 	}
 	free(arr);
+	arr = NULL;
 }
 
 static void	cleanup_images(t_vars *vars)
@@ -54,6 +67,6 @@ void	cleanup(t_vars *vars)
 	cleanup_images(vars);
 	if (vars->win)
 		mlx_destroy_window(vars->mlx, vars->win);
-	// mlx_destroy_display(vars->mlx);
+	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
 }

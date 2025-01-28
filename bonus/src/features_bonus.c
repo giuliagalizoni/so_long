@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   features_bonus.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 15:06:40 by ggalizon          #+#    #+#             */
+/*   Updated: 2025/01/28 17:23:54 by ggalizon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long_bonus.h"
 
 void	put_movcount(t_vars *vars)
@@ -23,11 +35,45 @@ void	put_movcount(t_vars *vars)
 	free(str_to_show);
 }
 
+void	toggle_img(void *img1, void *img2, void **image_to_display)
+{
+	if (*image_to_display == img1)
+		*image_to_display = img2;
+	else
+		*image_to_display = img1;
+}
+
 void	farmer_animation(t_vars *vars, int keycode)
 {
+	static void	*image_to_display;
+
 	if (keycode == LEFT)
 	{
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->farmer.left,
-		vars->farmer.x, vars->farmer.y);
+		if (!image_to_display)
+			image_to_display = vars->farmer.left_1;
+		toggle_img(vars->farmer.left_1, vars->farmer.left_2, &image_to_display);
+		mlx_put_image_to_window(vars->mlx, vars->win, image_to_display,
+			vars->farmer.x, vars->farmer.y);
+	}
+	if (keycode == RIGHT)
+	{
+		if (!image_to_display)
+			image_to_display = vars->farmer.right_1;
+		toggle_img(vars->farmer.right_1, vars->farmer.right_2, &image_to_display);
+		mlx_put_image_to_window(vars->mlx, vars->win, image_to_display,
+			vars->farmer.x, vars->farmer.y);
+	}
+	if (keycode == UP)
+	{
+		if (!image_to_display)
+			image_to_display = vars->farmer.back_1;
+		toggle_img(vars->farmer.back_1, vars->farmer.back_2, &image_to_display);
+		mlx_put_image_to_window(vars->mlx, vars->win, image_to_display,
+			vars->farmer.x, vars->farmer.y);
+	}
+	if (keycode == DOWN)
+	{
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->farmer.front,
+			vars->farmer.x, vars->farmer.y);
 	}
 }

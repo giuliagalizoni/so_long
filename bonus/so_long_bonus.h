@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
+/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:44:27 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/27 16:19:21 by giuliagaliz      ###   ########.fr       */
+/*   Updated: 2025/01/28 16:32:01 by ggalizon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@
 # define CARROT "assets/Carrot_big.xpm"
 # define HOUSE "assets/House.xpm"
 # define PIG "assets/Pig.xpm"
+
+# define FARMER_LEFT_1 "assets/Player_left_1.xpm"
+# define FARMER_LEFT_2 "assets/Player_left_2.xpm"
+# define FARMER_RIGHT_1 "assets/Player_right_1.xpm"
+# define FARMER_RIGHT_2 "assets/Player_right_2.xpm"
+# define FARMER_BACK_1 "assets/Player_back_1.xpm"
+# define FARMER_BACK_2 "assets/Player_back_2.xpm"
 
 # define TILE_SIZE 48
 
@@ -71,9 +78,12 @@ typedef struct s_player
 {
 	void	*front;
 	void	*start;
-	void	*left;
-	void	*right;
-	void	*back;
+	void	*left_1;
+	void	*left_2;
+	void	*right_1;
+	void	*right_2;
+	void	*back_1;
+	void	*back_2;
 	int		x;
 	int		y;
 	int		mov_count;
@@ -93,7 +103,7 @@ typedef struct s_vars
 }	t_vars;
 
 void	init_map(t_vars *vars, char *map_path);
-void	redraw_window(t_vars *vars);
+void	redraw_window(t_vars *vars, int key);
 void	init_img(t_vars *vars);
 void	move_farmer(t_vars *vars, int key);
 int		error_message(char *message);
@@ -104,5 +114,6 @@ int		exit_sucess(t_vars *vars);
 int		validate_map(t_vars *vars);
 
 void	put_movcount(t_vars *vars);
+void	farmer_animation(t_vars *vars, int keycode);
 
 #endif

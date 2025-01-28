@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
+/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:44:45 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/27 13:46:55 by giuliagaliz      ###   ########.fr       */
+/*   Updated: 2025/01/28 14:41:46 by ggalizon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ char	**make_map_arr(char *map_path)
 		map_arr[i] = get_next_line(map_fd);
 		i++;
 	}
+	map_arr[i] = get_next_line(map_fd);
+	free(map_arr[i]);
 	map_arr[i] = NULL;
-	close(map_fd);
 	return (map_arr);
 }
 

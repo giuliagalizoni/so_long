@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_img_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
+/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:59:44 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/27 15:52:54 by giuliagaliz      ###   ########.fr       */
+/*   Updated: 2025/01/28 16:15:40 by ggalizon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	end_game(t_vars *vars)
 	vars->map.end = 1;
 }
 
-void	redraw_window(t_vars *vars)
+void	redraw_window(t_vars *vars, int key)
 {
 	int	y;
 	int	x;
@@ -97,8 +97,7 @@ void	redraw_window(t_vars *vars)
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->farmer.start,
 			vars->farmer.x, vars->farmer.y);
 	else
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->farmer.front,
-			vars->farmer.x, vars->farmer.y);
+		farmer_animation(vars, key);
 	if (vars->map.arr[y][x] == 'C')
 	{
 		vars->map.arr[y][x] = '0';

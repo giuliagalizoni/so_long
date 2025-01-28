@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clean_and_exit_bonus.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 14:04:01 by ggalizon          #+#    #+#             */
+/*   Updated: 2025/01/28 14:04:24 by ggalizon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long_bonus.h"
 
 int	exit_sucess(t_vars *vars)
@@ -27,6 +39,7 @@ void	free_map(char **arr)
 		i++;
 	}
 	free(arr);
+	arr = NULL;
 }
 
 static void	cleanup_images(t_vars *vars)
@@ -51,9 +64,10 @@ void	cleanup(t_vars *vars)
 {
 	if (vars->map.arr)
 		free_map(vars->map.arr);
+
 	cleanup_images(vars);
 	if (vars->win)
 		mlx_destroy_window(vars->mlx, vars->win);
-	// mlx_destroy_display(vars->mlx);
+	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
 }
