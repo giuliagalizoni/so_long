@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   features_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:06:40 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/28 17:23:54 by ggalizon         ###   ########.fr       */
+/*   Updated: 2025/01/29 20:00:53 by giuliagaliz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,45 +35,61 @@ void	put_movcount(t_vars *vars)
 	free(str_to_show);
 }
 
-void	toggle_img(void *img1, void *img2, void **image_to_display)
+void	toggle_img(void *img1, void *img2, void **img_to_display)
 {
-	if (*image_to_display == img1)
-		*image_to_display = img2;
+
+	if (*img_to_display == img1)
+		*img_to_display = img2;
 	else
-		*image_to_display = img1;
+		*img_to_display = img1;
+
 }
 
-void	farmer_animation(t_vars *vars, int keycode)
+void	move_sides(t_vars *vars, int keycode, void **img_to_display)
 {
-	static void	*image_to_display;
-
 	if (keycode == LEFT)
 	{
-		if (!image_to_display)
-			image_to_display = vars->farmer.left_1;
-		toggle_img(vars->farmer.left_1, vars->farmer.left_2, &image_to_display);
-		mlx_put_image_to_window(vars->mlx, vars->win, image_to_display,
+		// if (!*img_to_display)
+			*img_to_display = vars->farmer.left_1;
+		// toggle_img(vars->farmer.left_1, vars->farmer.left_2, img_to_display);
+		mlx_put_image_to_window(vars->mlx, vars->win, *img_to_display,
 			vars->farmer.x, vars->farmer.y);
 	}
 	if (keycode == RIGHT)
 	{
-		if (!image_to_display)
-			image_to_display = vars->farmer.right_1;
-		toggle_img(vars->farmer.right_1, vars->farmer.right_2, &image_to_display);
-		mlx_put_image_to_window(vars->mlx, vars->win, image_to_display,
+		// if (!*img_to_display)
+			*img_to_display = vars->farmer.right_1;
+		// toggle_img(vars->farmer.right_1, vars->farmer.right_2, img_to_display);
+		mlx_put_image_to_window(vars->mlx, vars->win, *img_to_display,
 			vars->farmer.x, vars->farmer.y);
 	}
+}
+
+void	move_updown(t_vars *vars, int keycode, void **img_to_display)
+{
 	if (keycode == UP)
 	{
-		if (!image_to_display)
-			image_to_display = vars->farmer.back_1;
-		toggle_img(vars->farmer.back_1, vars->farmer.back_2, &image_to_display);
-		mlx_put_image_to_window(vars->mlx, vars->win, image_to_display,
+		// if (!*img_to_display)
+			*img_to_display = vars->farmer.back_1;
+		// toggle_img(vars->farmer.back_1, vars->farmer.back_2, img_to_display);
+		mlx_put_image_to_window(vars->mlx, vars->win, *img_to_display,
 			vars->farmer.x, vars->farmer.y);
 	}
 	if (keycode == DOWN)
 	{
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->farmer.front,
+		// if (!*img_to_display)
+			*img_to_display = vars->farmer.front_1;
+		// toggle_img(vars->farmer.front_1, vars->farmer.front_2, img_to_display);
+		mlx_put_image_to_window(vars->mlx, vars->win, *img_to_display,
 			vars->farmer.x, vars->farmer.y);
 	}
+}
+void	farmer_animation(t_vars *vars, int keycode)
+{
+	static void	*image_to_display;
+
+	if (keycode == LEFT || keycode == RIGHT)
+		move_sides(vars, keycode, &image_to_display);
+	if (keycode == UP || keycode == DOWN)
+		move_updown(vars, keycode, &image_to_display);
 }

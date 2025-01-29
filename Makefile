@@ -11,7 +11,7 @@ MLX_DIR = mlx
 ifeq ($(shell uname -s), Linux)
     MLXFLAGS = -L$(MLX_DIR) -lmlx_Linux -L$(LIBFT_DIR) -lft -lXext -lX11 -lm -lz
 else
-    MLXFLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+    MLXFLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -lz
 endif
 
 REMOVE = rm -f
@@ -39,7 +39,8 @@ BONUS_SRCS = \
     $(BONUS_DIR)$(SRC_DIR)movements_bonus.c \
     $(BONUS_DIR)$(SRC_DIR)put_img_bonus.c \
     $(BONUS_DIR)$(SRC_DIR)read_map_bonus.c \
-	$(BONUS_DIR)$(SRC_DIR)features_bonus.c
+	$(BONUS_DIR)$(SRC_DIR)features_bonus.c \
+	$(BONUS_DIR)$(SRC_DIR)enemies_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)

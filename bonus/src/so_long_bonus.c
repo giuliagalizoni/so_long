@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:44:10 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/28 15:17:26 by ggalizon         ###   ########.fr       */
+/*   Updated: 2025/01/29 21:50:19 by giuliagaliz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 int	handle_input(int keycode, t_vars *vars)
 {
+	if (keycode != vars->key)
+		vars->key = keycode; //trying sth
+
 	if (!vars->map.end)
 	{
 		move_farmer(vars, keycode);
-		redraw_window(vars, keycode);
+		redraw_window(vars);
 		ft_printf("\rMovements: %d   carrots: %d   ",
 			vars->farmer.mov_count, vars->map.c);
 	}
@@ -63,9 +66,12 @@ int	main(int ac, char **av)
 			vars.map.height, "So_long");
 	if (!vars.win)
 		return (free(vars.mlx), 1);
-	redraw_window(&vars, 0);
+	redraw_window(&vars);
 	mlx_key_hook(vars.win, handle_input, &vars);
 	mlx_hook(vars.win, 17, 0, exit_sucess, &vars);
+	mlx_loop_hook(vars.mlx, animate_monsters, &vars);
+	// mlx_hook(vars.win, 2, (1L<<0), key_press, &vars);
+	// mlx_hook(vars.win, 3, (1L<<1), key_release, &vars);
 	mlx_loop(vars.mlx);
 	cleanup(&vars);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_images_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:08:08 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/28 17:22:58 by ggalizon         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:04:30 by giuliagaliz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	init_farmer(t_vars *vars, int *img_width, int *img_height)
 {
-	vars->farmer.front = mlx_xpm_file_to_image(vars->mlx, FARMER,
-			img_width, img_height);
-	if (!vars->farmer.front)
-	{
-		cleanup(vars);
-		error_message("Error loading farmer image");
-	}
+	// vars->farmer.front = mlx_xpm_file_to_image(vars->mlx, FARMER,
+	// 		img_width, img_height);
+	// if (!vars->farmer.front)
+	// {
+	// 	cleanup(vars);
+	// 	error_message("Error loading farmer image");
+	// }
 	vars->farmer.start = mlx_xpm_file_to_image(vars->mlx, FARMER_START,
 			img_width, img_height);
 	if (!vars->farmer.start)
@@ -53,6 +53,13 @@ void	init_farmer_anim1(t_vars *vars, int *img_width, int *img_height)
 		cleanup(vars);
 		error_message("Error loading farmer back 1 image");
 	}
+	vars->farmer.front_1 = mlx_xpm_file_to_image(vars->mlx, FARMER_FRONT_1,
+			img_width, img_height);
+	if (!vars->farmer.front_1)
+	{
+		cleanup(vars);
+		error_message("Error loading farmer front 1 image");
+	}
 }
 
 void	init_farmer_anim2(t_vars *vars, int *img_width, int *img_height)
@@ -77,6 +84,13 @@ void	init_farmer_anim2(t_vars *vars, int *img_width, int *img_height)
 	{
 		cleanup(vars);
 		error_message("Error loading farmer back 2 image");
+	}
+	vars->farmer.front_2 = mlx_xpm_file_to_image(vars->mlx, FARMER_FRONT_2,
+			img_width, img_height);
+	if (!vars->farmer.front_2)
+	{
+		cleanup(vars);
+		error_message("Error loading farmer front 2 image");
 	}
 }
 
@@ -122,6 +136,12 @@ void	init_img(t_vars *vars)
 	vars->wall.img = mlx_xpm_file_to_image(vars->mlx, WALL,
 			&tile_width, &tile_height);
 	if (!vars->wall.img)
+	{
+		cleanup(vars);
+		error_message("Error loading wall image");
+	}
+	vars->monster_img = mlx_xpm_file_to_image(vars->mlx, MONSTER, &tile_width, &tile_height);
+	if (!vars->monster_img)
 	{
 		cleanup(vars);
 		error_message("Error loading wall image");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:44:45 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/28 14:24:16 by ggalizon         ###   ########.fr       */
+/*   Updated: 2025/01/29 21:47:26 by giuliagaliz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	scan_map(t_vars *vars, int *y, int *x)
 			else if (vars->map.arr[*y][*x] == 'E')
 				vars->map.e++;
 			else if (vars->map.arr[*y][*x] != '0'
-				&& vars->map.arr[*y][*x] != '1')
+				&& vars->map.arr[*y][*x] != '1' && vars->map.arr[*y][*x] != 'M')
 				vars->map.invalid = 1;
 			(*x)++;
 		}
@@ -105,6 +105,7 @@ void	init_map(t_vars *vars, char *map_path)
 	vars->map.width = (x - 1) * TILE_SIZE;
 	vars->map.height = y * TILE_SIZE;
 	vars->farmer.mov_count = 0;
+	init_monsters(vars);
 	check_map(vars);
 	if (!validate_map(vars))
 		cleanup(vars);

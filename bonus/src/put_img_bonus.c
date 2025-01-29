@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_img_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:59:44 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/28 16:15:40 by ggalizon         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:10:18 by giuliagaliz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,11 @@ void	end_game(t_vars *vars)
 	vars->map.end = 1;
 }
 
-void	redraw_window(t_vars *vars, int key)
+void	redraw_window(t_vars *vars) // tirei a key
 {
 	int	y;
 	int	x;
+	int i;
 
 	y = vars->farmer.y / TILE_SIZE;
 	x = vars->farmer.x / TILE_SIZE;
@@ -93,11 +94,31 @@ void	redraw_window(t_vars *vars, int key)
 	draw_layer(vars);
 	put_credits(vars);
 	put_movcount(vars);
-	if (vars->map.arr[y][x] == 'P')
+
+	if (vars->key == 0)
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->farmer.start,
 			vars->farmer.x, vars->farmer.y);
 	else
-		farmer_animation(vars, key);
+		farmer_animation(vars, vars->key);
+
+	// if (vars->map.arr[y][x] == 'P')
+	// 	mlx_put_image_to_window(vars->mlx, vars->win, vars->farmer.start,
+	// 		vars->farmer.x, vars->farmer.y);
+	// else
+	// {
+	// 	if (vars->key_pressed)
+	// 		farmer_animation(vars, vars->key);
+	// }
+
+	// Draw all monsters using the single monster image
+    for (i = 0; i < vars->monster_count; i++)
+    {
+        mlx_put_image_to_window(vars->mlx, vars->win, vars->monster_img,
+            vars->monsters[i].x * TILE_SIZE, vars->monsters[i].y * TILE_SIZE);
+    }
+
+	// mlx_put_image_to_window(vars->mlx, vars->win, vars->monster_img,
+	// 	vars->monster.x * TILE_SIZE, vars->monster.y * TILE_SIZE);
 	if (vars->map.arr[y][x] == 'C')
 	{
 		vars->map.arr[y][x] = '0';
@@ -108,4 +129,9 @@ void	redraw_window(t_vars *vars, int key)
 		end_game(vars);
 		return ;
 	}
+	if (vars->map.end)
+    {
+        game_over(vars);
+        return ;
+    }
 }

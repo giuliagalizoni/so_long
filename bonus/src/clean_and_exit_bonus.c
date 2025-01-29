@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_and_exit_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 14:04:01 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/28 14:04:24 by ggalizon         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:15:24 by giuliagaliz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,14 @@ void	cleanup(t_vars *vars)
 {
 	if (vars->map.arr)
 		free_map(vars->map.arr);
-
+	if (vars->monsters)
+    {
+        free(vars->monsters);
+        vars->monsters = NULL;
+    }
 	cleanup_images(vars);
 	if (vars->win)
 		mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
+	// mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
 }
