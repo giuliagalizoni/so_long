@@ -6,7 +6,7 @@
 /*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:44:27 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/29 22:03:39 by giuliagaliz      ###   ########.fr       */
+/*   Updated: 2025/04/07 10:46:52 by giuliagaliz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define MONSTER "assets/Slime.xpm"
 
 # define TILE_SIZE 48
-#define ANIMATION_SPEED 20
+#define ANIMATION_SPEED 10
 
 # ifdef __APPLE__ // macOS
 #  define UP 126
