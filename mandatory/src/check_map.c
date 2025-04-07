@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:26:55 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/28 14:46:39 by ggalizon         ###   ########.fr       */
+/*   Updated: 2025/01/28 21:03:54 by giuliagaliz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,18 @@ static int	check_borders(t_vars *vars)
 	return (0);
 }
 
-void	check_screen_size(t_vars *vars)
-{
-	int	screen_width;
-	int	screen_height;
+// void	check_screen_size(t_vars *vars)
+// {
+// 	int	screen_width;
+// 	int	screen_height;
 
-	mlx_get_screen_size(vars->mlx, &screen_width, &screen_height);
-	if (vars->map.width > screen_width || vars->map.height > screen_height)
-	{
-		cleanup(vars);
-		error_message("This map is way too big for your screen");
-	}
-}
+// 	mlx_get_screen_size(vars->mlx, &screen_width, &screen_height);
+// 	if (vars->map.width > screen_width || vars->map.height > screen_height)
+// 	{
+// 		cleanup(vars);
+// 		error_message("This map is way too big for your screen");
+// 	}
+// }
 
 int	check_map(t_vars *vars)
 {
@@ -91,7 +91,7 @@ int	check_map(t_vars *vars)
 				error_message("Invalid map. Please select a rectangular map"));
 		y++;
 	}
-	check_screen_size(vars);
+	// check_screen_size(vars); //commented for mac
 	if (check_borders(vars))
 		return (cleanup(vars), error_message
 			("Map validation failed.There's a whole in your map"));

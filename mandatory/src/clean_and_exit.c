@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_and_exit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggalizon <ggalizon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giuliagalizoni <giuliagalizoni@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 11:22:46 by ggalizon          #+#    #+#             */
-/*   Updated: 2025/01/28 14:47:10 by ggalizon         ###   ########.fr       */
+/*   Updated: 2025/01/28 21:04:24 by giuliagaliz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	cleanup(t_vars *vars)
 	cleanup_images(vars);
 	if (vars->win)
 		mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
+	// mlx_destroy_display(vars->mlx); // comented out for mac
 	free(vars->mlx);
 }
